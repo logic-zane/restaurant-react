@@ -1,3 +1,9 @@
+// App.js
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import GallerySlider from "./components/GallerySlider";
@@ -9,16 +15,27 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <Navbar />
-      <HeroSection />
-      <GallerySlider />
-      <Menu />
-      <About />
-      <Contact />
-      <CartModal />
-      <Footer />
-    </div>
+    <Router>
+      <div className="bg-gray-100 min-h-screen">
+        <Navbar />
+        <CartModal />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <HeroSection />
+                <GallerySlider />
+              </>
+            }
+          />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
