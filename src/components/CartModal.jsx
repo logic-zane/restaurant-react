@@ -12,10 +12,11 @@ export default function CartModal() {
 
   return (
     <>
-      <div className="fixed top-4 right-4 z-50">
+      {/* Position the cart button lower so it doesn’t cover the navbar */}
+      <div className="fixed top-[100px] right-4 z-50">
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-yellow-400 hover:text-gray-900"
+          className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-yellow-400 hover:text-gray-900 transition"
         >
           🛒 View Cart ({totalItems})
         </button>
@@ -23,10 +24,13 @@ export default function CartModal() {
 
       {isOpen && (
         <>
+          {/* Background overlay */}
           <div
             className="fixed inset-0 bg-black bg-opacity-50 z-40"
             onClick={() => setIsOpen(false)}
           ></div>
+
+          {/* Side cart panel */}
           <div className="fixed top-0 right-0 h-full w-[400px] bg-white z-50 shadow-lg p-6 overflow-y-auto">
             <h3 className="text-xl font-bold mb-4">Your Cart</h3>
 
@@ -35,10 +39,7 @@ export default function CartModal() {
             ) : (
               Array.isArray(cart) &&
               cart.map((item) => (
-                <div
-                  key={item.name}
-                  className="flex justify-between items-center mb-4"
-                >
+                <div key={item.name} className="flex justify-between items-center mb-4">
                   <div>
                     <p className="font-semibold">{item.name}</p>
                     <p className="text-sm text-gray-600">
@@ -71,6 +72,7 @@ export default function CartModal() {
             )}
 
             <div className="mt-6 font-bold">Total: ${total.toFixed(2)}</div>
+
             <div className="mt-4 flex justify-between">
               <button
                 onClick={clearCart}
